@@ -1,0 +1,89 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.config/htop/htoprc:
+      create: true
+      path: htoprc
+      force: true
+    ~/.tmux.conf:
+      create: true
+      path: tmux.conf
+      force: true
+    ~/.ideavimrc:
+      create: true
+      path: ideavimrc
+      force: true
+    # VIM
+    ~/.vim/autoload:
+      create: true
+      path: vim/autoload
+    ~/.vim_config:
+      create: true
+      path: vim/vim_config
+    ~/.vimrc:
+      create: true
+      path: vim/vimrc
+      force: true
+    # ZSH
+    ~/.zshrc:
+      create: true
+      path: zsh/zshrc
+      force: true
+    ~/.p10k.zsh:
+      create: true
+      path: zsh/p10k.zsh
+      force: true
+    ~/.config/zsh/config.d/common:
+      create: true
+      path: zsh/zsh_configs/common
+      force: true
+    ~/.config/zsh/config.d/macOS:
+      create: true
+      path: zsh/zsh_configs/macOS
+      force: true
+    ~/.config/zsh/config.d/linux:
+      create: true
+      path: zsh/zsh_configs/linux
+      force: true
+    # karabiner
+    ~/.config/karabiner/karabiner.json:
+      create: true
+      path: karabiner/karabiner.json
+      force: true
+    # custom scripts
+    ~/.bin/bak:
+      create: true
+      force: true
+      path: scripts/bak
+    ~/.bin/sfrm:
+      create: true
+      force: true
+      path: scripts/sfrm
+    ~/.bin/trash-restore:
+      create: true
+      force: true
+      path: scripts/trash-restore
+    ~/.bin/extract:
+      create: true
+      force: true
+      path: scripts/extract
+    ~/.bin/clip:
+      create: true
+      force: true
+      path: scripts/clip
+    ~/.bin/ffind:
+      create: true
+      force: true
+      path: scripts/ffind
+    # claude
+    ~/.claude/statusline-command.sh:
+      create: true
+      path: ai/claude/statusline-command.sh
+      force: true
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]

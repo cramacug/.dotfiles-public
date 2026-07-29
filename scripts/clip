@@ -1,0 +1,17 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+  echo "Usage: clip <file>"
+  exit 1
+fi
+
+if command -v pbcopy &> /dev/null; then
+  cat "$1" | pbcopy
+elif command -v xclip &> /dev/null; then
+  cat "$1" | xclip -selection clipboard
+else
+  echo "Clipboard tool not found."
+  exit 1
+fi
+
+echo "Copied '$1' to clipboard."
+

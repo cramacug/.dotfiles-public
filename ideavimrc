@@ -1,0 +1,180 @@
+" ============================================================
+" IdeaVim configuration
+" Goal:
+" - Vim/Neovim-style navigation and editing
+" - IntelliJ semantic actions through :action
+" - Space as leader key
+" ============================================================
+" source ~/.vimrc
+source ~/.dotfiles/vim/vim_config/vim-shared-configrc
+let mapleader = " "
+" ------------------------------------------------------------
+" Core IdeaVim behavior
+" ------------------------------------------------------------
+sethandler a:vim
+set ideajoin
+set clipboard+=unnamed,autoselect,ideaput
+set surround
+set commentary
+set highlightedyank
+
+let g:highlightedyank_highlight_color = "rgba(200, 200, 50, 100)"
+let g:highlightedyank_highlight_duration = "1000"
+
+" ============================================================
+" 1. Code navigation
+" ============================================================
+" Go to declaration / implementation / super method
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gs :action GotoSuperMethod<CR>
+" Jump to last edit/change
+nnoremap gb :action JumpToLastChange<CR>
+" Find usages / references
+nnoremap <leader>u :action FindUsages<CR>
+
+" ============================================================
+" 2. Search, files, classes, and actions
+" ============================================================
+nnoremap <leader>a :action GotoAction<CR>
+nnoremap <leader>e :action RecentFiles<CR>
+nnoremap <leader>f :action GotoClass<CR>
+nnoremap <leader>F :action GotoFile<CR>
+"nnoremap <leader><leader> :action SearchEverywhere<CR>
+nnoremap <leader>s :action FileStructurePopup<CR>
+
+" ============================================================
+" 3. Diagnostics and code intentions
+" ============================================================
+nnoremap gh :action ShowIntentionActions<CR>
+nnoremap gH :action ShowErrorDescription<CR>
+" Navigate errors
+nnoremap ]d :action GotoNextError<CR>
+nnoremap [d :action GotoPreviousError<CR>
+
+" ============================================================
+" 4. Refactoring [x]
+" ============================================================
+nnoremap <leader>R :action RenameElement<CR>
+" Refactor menu
+nnoremap <leader>MM :action Refactorings.QuickListPopupAction<CR>
+" Inline
+nnoremap <leader>I :action Inline<CR>
+" Introduce variable
+nnoremap <leader>V :action IntroduceVariable<CR>
+vnoremap <leader>V :action IntroduceVariable<CR>
+
+" Extract method/function
+" nnoremap <leader>M :action ExtractFunction<CR>
+" vnoremap <leader>M :action ExtractFunction<CR>
+nnoremap <leader>M :action ExtractMethod<CR>
+vnoremap <leader>M :action ExtractMethod<CR>
+" Introduce parameter
+nnoremap <leader>P :action IntroduceParameter<CR>
+vnoremap <leader>P :action IntroduceParameter<CR>
+
+nnoremap <leader>nf :action NewClass<CR>
+
+
+" ============================================================
+" 5. Code generation and formatting
+" ============================================================
+" Reformat code
+nnoremap == :action ReformatCode<CR>
+vnoremap == :action ReformatCode<CR>
+" Optimize imports
+nnoremap <leader>oi :action OptimizeImports<CR>
+" Generate code: constructor, getters, setters, override, etc.
+" nnoremap <leader>i :action Generate<CR>
+
+" ============================================================
+" 6. Run actions
+" ============================================================
+" Refactor menu
+nnoremap <leader>rm :action RunMenu<CR>
+" Run current configuration
+nnoremap <leader>rC :action RunConfiguration<CR>
+" Run current class/test (cursor must be inside the test, not over the signature)
+nnoremap <leader>r :action RunClass<CR>
+" Rerun the last test
+nnoremap <leader>rr :action Rerun<CR>
+" Run with coverage
+nnoremap <leader>rc :action RunCoverage<CR>
+
+" ============================================================
+" 7. Debug actions
+" ============================================================
+" Debug current class/test
+nnoremap <leader>d :action DebugClass<CR>
+" Debug current configuration
+" nnoremap <leader>d :action Debug<CR>
+" ============================================================
+" 8. Breakpoints
+" ============================================================
+" Toggle line breakpoint
+nnoremap <leader>bb :action ToggleLineBreakpoint<CR>
+" Enable/disable breakpoint
+nnoremap <leader>bd :action ToggleBreakpointEnabled<CR>
+" Mute/unmute all breakpoints
+nnoremap <leader>bm :action XDebugger.MuteBreakpoints<CR>
+
+
+
+" ============================================================
+" 9. Git / VCS
+" ============================================================
+" Annotate / blame current file
+nnoremap <leader>ga :action Annotate<CR>
+" Show file history
+nnoremap <leader>gh :action Vcs.ShowTabbedFileHistory<CR>
+" Compare with branch
+nnoremap <leader>gc :action Git.CompareWithBranch<CR>
+" Git menu
+nnoremap <leader>gg :action Git.Menu<CR>
+
+" ============================================================
+" 10. Tabs and editor navigation
+" ============================================================
+" Previous / next editor tab
+nnoremap <S-h> :action PreviousTab<CR>
+nnoremap <S-l> :action NextTab<CR>
+" Alternative tab navigation
+"nnoremap <leader>[ :action PreviousTab<CR>
+"nnoremap <leader>] :action NextTab<CR>
+
+" ============================================================
+" 11. Window / split navigation
+" ============================================================
+nnoremap <C-h> <C-W>h
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
+
+" ============================================================
+" 12. Terminal
+" ============================================================
+" Open/focus IntelliJ terminal
+nnoremap <leader>T :action ActivateTerminalToolWindow<CR>
+
+" ============================================================
+" 13. Selection helpers
+" ============================================================
+" Expand selection
+" nnoremap <leader>v :action EditorSelectWord<CR>
+" vnoremap <leader>v :action EditorSelectWord<CR>
+
+" Shrink selection
+"vnoremap <leader>V :action EditorUnSelectWord<CR>
+
+
+" ============================================================
+" 14. Clipboard / paste history
+" ============================================================
+" IntelliJ clipboard history.
+" If this action does not work, run:
+"   :actionlist clipboard
+"   :actionlist paste
+" and replace ClipboardHistory with the correct action id.
+" nnoremap <leader>P :action ClipboardHistory<CR>
+nnoremap <leader>p :action PasteMultiple<CR>
+

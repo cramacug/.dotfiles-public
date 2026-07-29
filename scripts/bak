@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Check if at least one filename is provided
+if [ "$#" -lt 1 ]; then
+  echo "Usage: bak <filename1> [filename2 ... filenameN]"
+  exit 1
+fi
+
+# Get the ISO 8601-like timestamp (safe for filenames)
+TIMESTAMP=$(date +"%Y-%m-%dT%H-%M-%S")
+
+# Loop through all provided filenames
+for FILE in "$@"; do
+  if [ -f "$FILE" ]; then
+    BACKUP="${FILE}.${TIMESTAMP}.bak"
+    cp "$FILE" "$BACKUP"
+    echo "Backup created: $BACKUP"
+  else
+    echo "Warning: File not found – '$FILE' (skipping)"
+  fi
+done

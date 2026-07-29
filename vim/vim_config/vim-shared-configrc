@@ -1,0 +1,2 @@
+source ~/.vim_config/core.vim
+source ~/.vim_config/basic_cramacug.vim

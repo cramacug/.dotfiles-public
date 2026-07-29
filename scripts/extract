@@ -1,0 +1,62 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: extract <archive-file>"
+  exit 1
+fi
+
+file="$1"
+
+if [ ! -f "$file" ]; then
+  echo "'$file' is not a valid file."
+  exit 1
+fi
+
+# Determine base name for folder (strip common extensions)
+filename=$(basename "$file")
+folder="${filename%%.*}"  # Simple folder name from before first dot
+
+# Create extraction folder
+if [ -d "$folder" ]; then
+  echo "⚠️ Folder '$folder' already exists. Skipping extraction."
+  exit 1
+fi
+
+mkdir "$folder" || exit 1
+
+# For .rar only — check if tar supports it
+if [[ "$file" == *.rar ]]; then
+  echo "🔍 Checking if tar supports .rar format..."
+  tar -tf "$file" &>/dev/null
+  if [ $? -ne 0 ]; then
+    echo "❌ Your tar does not support .rar files. Aborting."
+    rmdir "$folder"
+    exit 1
+  fi
+fi
+
+# Create a temporary dir for safe extraction
+tmpdir=$(mktemp -d)
+
+# Extract based on extension
+case "$file" in
+  *.tar.gz|*.tgz)     tar -xzf "$file" -C "$tmpdir" ;;
+  *.tar.bz2|*.tbz2)   tar -xjf "$file" -C "$tmpdir" ;;
+  *.tar.xz|*.txz)     tar -xJf "$file" -C "$tmpdir" ;;
+  *.tar.zst|*.tzst)   tar --use-compress-program=unzstd -xf "$file" -C "$tmpdir" ;;
+  *.tar)              tar -xf "$file" -C "$tmpdir" ;;
+  *.rar)              tar -xf "$file" -C "$tmpdir" ;;  # After verification above
+  *)
+    echo "❌ Unsupported archive format: '$file'"
+    echo "Supported: .tar, .tar.gz, .tgz, .tar.bz2, .tbz2, .tar.xz, .txz, .tar.zst, .rar"
+    rmdir "$folder" "$tmpdir"
+    exit 1
+    ;;
+esac
+
+# Move extracted files safely to final folder
+mv "$tmpdir"/* "$folder"/ 2>/dev/null
+rmdir "$tmpdir" 2>/dev/null
+
+echo "✅ Extracted '$file' into '$folder/'"
+

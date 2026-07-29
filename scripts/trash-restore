@@ -1,0 +1,47 @@
+#!/bin/bash
+
+trash_dir="/tmp/trash"
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: trash-restore <partial-filename>"
+  exit 1
+fi
+
+query="$1"
+matches=($(ls "$trash_dir" 2>/dev/null | grep -i "$query" | grep -v "\.meta$"))
+
+if [ "${#matches[@]}" -eq 0 ]; then
+  echo "No trashed files matching '$query' found."
+  exit 1
+fi
+
+echo "Found the following trashed files matching '$query':"
+for i in "${!matches[@]}"; do
+  echo "[$i] ${matches[$i]}"
+done
+
+read -p "Enter the number of the file to restore: " index
+
+if ! [[ "$index" =~ ^[0-9]+$ ]] || [ "$index" -ge "${#matches[@]}" ]; then
+  echo "Invalid selection."
+  exit 1
+fi
+
+selected="${matches[$index]}"
+selected_path="${trash_dir}/${selected}"
+meta_file="${selected_path}.meta"
+
+if [ ! -f "$meta_file" ]; then
+  echo "No metadata found for '$selected'. Cannot restore original path."
+  exit 1
+fi
+
+original_path=$(<"$meta_file")
+dest_dir=$(dirname "$original_path")
+
+mkdir -p "$dest_dir"
+mv "$selected_path" "$original_path"
+rm -f "$meta_file"
+
+echo "Restored '$selected' -> '$original_path'"
+

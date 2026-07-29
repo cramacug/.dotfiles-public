@@ -1,0 +1,26 @@
+# Insert your preferred key mappings here.
+unmap t
+map tn createTab
+map to closeOtherTabs
+map tR closeTabsOnRight
+map tL closeTabsOnLeft
+map tM toggleMuteTab
+# Insert your preferred key mappings here.
+unmap t
+map tn createTab
+map to closeOtherTabs
+map tR closeTabsOnRight
+map tL closeTabsOnLeft
+map tp togglePinTab
+map tm toggleMuteTab
+unmap J
+unmap K
+unmap H
+map H previousTab
+unmap L
+map L nextTab
+map i goBack
+map o goForward
+map tp visitPreviousTab
+unmap R
+map R reload hard

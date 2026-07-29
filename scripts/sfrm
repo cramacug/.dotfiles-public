@@ -1,0 +1,29 @@
+#!/bin/bash
+
+trash_dir="/tmp/trash"
+mkdir -p "$trash_dir"
+
+timestamp=$(date '+%Y-%m-%dT%H-%M-%S')
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: sfrm <file1> [file2 ...]"
+  exit 1
+fi
+
+for file in "$@"; do
+  if [ -e "$file" ]; then
+    abs_path=$(realpath "$file")                     # Capture BEFORE move
+    base=$(basename -- "$file")
+    dest="${trash_dir}/${base}.${timestamp}"
+    meta="${dest}.meta"
+
+    mv "$file" "$dest"
+    echo "$abs_path" > "$meta"
+
+    echo "Moved '$file' -> '$dest'"
+    echo "Original path saved in '$meta'"
+  else
+    echo "Warning: '$file' not found."
+  fi
+done
+
