@@ -178,3 +178,7 @@ alias ll1='ls -c1'
 
 # Custom script path
 export PATH="$HOME/.bin:$PATH"
+
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"
+export PATH="$HOME/.venvs/ansible/bin:$PATH"

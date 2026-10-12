@@ -6,7 +6,7 @@
 " - Space as leader key
 " ============================================================
 " source ~/.vimrc
-source ~/.dotfiles/vim/vim_config/vim-shared-configrc
+source ~/.dotfiles-public/vim/vim_config/vim-shared-configrc
 let mapleader = " "
 " ------------------------------------------------------------
 " Core IdeaVim behavior
