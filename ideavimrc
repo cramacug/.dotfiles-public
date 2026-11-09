@@ -112,7 +112,6 @@ nnoremap <leader>d :action DebugClass<CR>
 " 8. Breakpoints
 " ============================================================
 " Toggle line breakpoint
-nnoremap <leader>bb :action ToggleLineBreakpoint<CR>
 nnoremap <leader>bk :action ToggleLineBreakpoint<CR>
 " Enable/disable breakpoint
 nnoremap <leader>bd :action ToggleBreakpointEnabled<CR>

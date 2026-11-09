@@ -20,6 +20,7 @@ alias dex='docker exec --interactive --tty'
 # alias dcdri='docker compose --file ./docker-compose.yml down --rmi all'
 # alias dcdrv='docker compose --file ./docker-compose.yml down --volumes --remove-orphans'
 alias docker_psf='docker ps --format "{{.ID}} -- {{.State}} -- {{.Ports}} -- {{.Names}}"'
+alias dcr='docker compose up --detach --force-recreate --no-deps '
 # alias dcdidea='find -E ~/IdeaProjects -type file -regex ".*docker-compose.ya?ml" -print0 | xargs -0 -I X docker compose --file X down'
 # alias dcdidea='find -E ~/IdeaProjects -type file -regex ".*docker-compose.ya?ml" -print0 | xargs -t -0 -I X docker compose --file X down | echo "------\n" '
 
