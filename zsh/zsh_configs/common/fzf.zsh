@@ -28,6 +28,12 @@ _fzf_comprun() {
 # FZF
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 # export FZF_DEFAULT_OPTS="--style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}"
+
+# Disable the Ctrl-T (file picker) and Alt-C (cd picker) key bindings, which
+# open fzf by accident while typing. Ctrl-R history search stays enabled.
+export FZF_CTRL_T_COMMAND=""
+export FZF_ALT_C_COMMAND=""
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # zsh
