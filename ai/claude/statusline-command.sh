@@ -10,6 +10,12 @@ case "$(uname -s)" in
   *) date_from_epoch() { date -d "@$1" +"$2"; } ;;
 esac
 
+# jq is required to parse the status payload; say so instead of rendering blanks
+if ! command -v jq >/dev/null 2>&1; then
+  printf "statusline: jq not installed"
+  exit 0
+fi
+
 input=$(cat)
 
 # 1. Current directory (abbreviate $HOME as ~), split into dim parent path + bold last segment
@@ -18,9 +24,14 @@ dir="${cwd/#$HOME/~}"
 
 last="${dir##*/}"
 parent="${dir%/*}"
-if [ "$parent" = "$dir" ] || [ -z "$last" ]; then
+if [ "$dir" = "/" ]; then
+  # filesystem root: show "/" itself as the bold segment
+  last="/"
   parent=""
-elif [ -n "$parent" ]; then
+elif [ "$parent" = "$dir" ] || [ -z "$last" ]; then
+  parent=""
+else
+  # also covers root-level dirs like /tmp, where parent is "" and becomes "/"
   parent="${parent}/"
 fi
 
