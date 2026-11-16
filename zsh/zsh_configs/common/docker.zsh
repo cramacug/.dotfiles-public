@@ -27,7 +27,7 @@ alias dcr='docker compose up --detach --force-recreate --no-deps '
 # Docker CLI completions (added by Docker Desktop)
 fpath=("$HOME/.docker/completions" $fpath)
 autoload -Uz compinit
-compinit
+compinit -u -d "$ZSH_COMPDUMP"
 
 dcd() {
   local file="./docker-compose.yml"
