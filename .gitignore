@@ -62,4 +62,6 @@ fabric.properties
 
 .idea
 .DS_Store
+
+# htop rewrites this on every settings change
 htoprc
