@@ -188,3 +188,6 @@ export PATH="$HOME/.venvs/ansible/bin:$PATH"
 if [ -f "/Users/m.cabre/.jbcontext/env" ]; then
     . "/Users/m.cabre/.jbcontext/env"
 fi
+
+# Added by Antigravity CLI installer
+export PATH="/Users/marc_cg/.local/bin:$PATH"
