@@ -7,11 +7,11 @@
 - link:
     ~/.tmux.conf:
       create: true
-      path: tmux.conf
+      path: config/tmux.conf
       force: true
     ~/.ideavimrc:
       create: true
-      path: ideavimrc
+      path: config/ideavimrc
       force: true
     # VIM
     ~/.vim/autoload:
