@@ -177,9 +177,6 @@ alias llf='ls -lh -D "%F %T"'
 alias ll1='ls -c1'
 # alias rm='sfrm'
 
-# Custom script path
-export PATH="$HOME/.bin:$PATH"
-
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
 export PATH="$HOME/.venvs/ansible/bin:$PATH"
@@ -189,5 +186,5 @@ if [ -f "$HOME/.jbcontext/env" ]; then
     . "$HOME/.jbcontext/env"
 fi
 
-# Added by Antigravity CLI installer
+# User scripts (symlinked from scripts/) and CLI installers
 export PATH="$HOME/.local/bin:$PATH"
