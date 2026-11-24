@@ -5,10 +5,6 @@
 - clean: ['~']
 
 - link:
-    ~/.config/htop/htoprc:
-      create: true
-      path: htoprc
-      force: true
     ~/.tmux.conf:
       create: true
       path: tmux.conf
