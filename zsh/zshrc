@@ -185,9 +185,9 @@ export PATH="$HOME/.opencode/bin:$PATH"
 export PATH="$HOME/.venvs/ansible/bin:$PATH"
 
 # Added by JetBrains Context CLI installer
-if [ -f "/Users/m.cabre/.jbcontext/env" ]; then
-    . "/Users/m.cabre/.jbcontext/env"
+if [ -f "$HOME/.jbcontext/env" ]; then
+    . "$HOME/.jbcontext/env"
 fi
 
 # Added by Antigravity CLI installer
-export PATH="/Users/marc_cg/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
