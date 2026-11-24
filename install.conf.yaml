@@ -83,3 +83,5 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+  - command: mkdir -p ~/.config/htop && { [ -e ~/.config/htop/htoprc ] || cp config/htoprc.template ~/.config/htop/htoprc; }
+    description: Seeding htop config (first run only)
